@@ -3,8 +3,9 @@ $(document).ready(function() {
     var username, password, playlist;
 
     username = $('#targetUser').val();
-    password = $('#password').val();
     playlist = $('#playlist').val();
+
+    console.log("username: " + username + ", playlist: " + playlist);
 
     return false;
   });
