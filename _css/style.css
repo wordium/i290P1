@@ -1,1 +1,40 @@
+
+
 /** styles **/
+
+/*** header ***/
+header {
+  background-color: #eee;
+  text-align: center;
+}
+
+/*** filmstrip preview ***/
+#filmstrip li {
+  display: inline;
+}
+
+/*** form ***/
+#trailFinder {
+  width: 300px;
+  margin: auto auto;
+}
+
+#trailFinder input {
+  float: right;
+}
+
+
+/*** videos ***/
+#video {
+  width: 420px;
+  margin: auto auto;
+  padding-top: 35px;
+}
+
+
+
+/*** footer ***/
+footer {
+  background-color: #eee;
+  text-align: center;
+}
