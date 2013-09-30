@@ -2,9 +2,16 @@
 
 /** styles **/
 
+
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
 /*** header ***/
 header {
-  background-color: #eee;
+  background:#222;
+  color:#fff;
+  padding:10px;
   text-align: center;
 }
 
