@@ -66,7 +66,7 @@ function parseYoutubeJSON(data){
 		
 		//Check if all data is correct 
 		//console.log("id: " + id + "cTitle: " + cTitle + "title: " + title + "description: " + description + "date: " + date + "image: " + image)
-		//http://www.youtube.com/embed/videoseries?list=PL9C5815B418D1508E&index=1
+		//https://www.youtube.com/embed/videoseries?list=PL9C5815B418D1508E&index=1 //Url format for calling
 		
 	}
 	
@@ -75,6 +75,24 @@ function parseYoutubeJSON(data){
 //Youtube-playlist-search callback
 function parseYoutubePLJSON(data){
 	console.log(data);
+	var itemsInList = data.pageInfo.totalResults; //Counts # of videos in playlist, max. 50 visible at a time
+	var items = data.items;
+	for (var key in items){
+		var video = items[key];
+		var id = video.id; //Specific ID for the video including the playlistId
+		var cId = video.snippet.resourceId.videoId; //Specific ID for the video excluding the playlistId
+		var description = video.snippet.description; //Description of the video !NB can be very long!
+		var playlistId = video.snippet.playlistId; //The Id of the playlist this video is in, redundant
+		var position = video.snippet.position; //The position of the video in the playlist
+		var date = video.snippet.publishedAt; //The date when the video was uploaded
+		var image = video.snippet.thumbnails.high.url; //High res preview image of the playlist
+		var title = video.snippet.title; //Title of the video
+		
+		//Check if all data is correct 
+		//console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
+		//https://www.youtube.com/watch?v=1XYgtSCHvp4&list=PL26112E48392C500F&index=1 //Url format for calling
+		
+	}
 }
 
 function error(e){
