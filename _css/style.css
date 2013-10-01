@@ -27,21 +27,23 @@ header {
 }
 
 #trailFinder input {
-  float: right;
+  float: left;
 }
 
 
 /*** videos ***/
-#video {
+#viewer {
+  visibility: hidden;
   width: 420px;
+  height: 315px;
   margin: auto auto;
   padding-top: 35px;
 }
 
-
-
 /*** footer ***/
 footer {
+  margin-top: 15px;
+  padding: 10px;
   background-color: #eecbad;
   text-align: center;
 }
