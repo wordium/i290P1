@@ -68,7 +68,7 @@ function parseYoutubeJSON(data){
 		var image = list.snippet.thumbnails.high.url; //High res preview image of the playlist
 		
     console.log("images: "+ image);
-    $('#main').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
+    $('#filmstrip').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
     
 		//Check if all data is correct 
 		//console.log("id: " + id + "cTitle: " + cTitle + "title: " + title + "description: " + description + "date: " + date + "image: " + image)

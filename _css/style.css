@@ -11,14 +11,18 @@ body{
 header {
   background-color: #eecbad;
   color:#fff;
+  font-size: 20px;
   padding:10px;
   text-align: center;
 }
 
+
 /*** filmstrip preview ***/
 #filmstrip li {
   display: inline;
+  height: auto;
 }
+
 
 /*** form ***/
 #trailFinder {
