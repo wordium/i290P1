@@ -2,6 +2,26 @@ var KEY = "AIzaSyDZeRhva5hPAP7JHzk6-iD6wZhCKj1guaU"; //My private key USE WITH C
 var BASE = "https://www.googleapis.com/youtube/v3"; //We use version three of the google API
 
 $(document).ready(function() {
+
+  // getting users
+  $("#findUserForm").on('submit', function(e){
+    e.preventDefault();
+
+    var username = $('#username').val();
+    console.log('username' + username);
+
+    var idSearchURL = BASE + "/search?part=snippet&order=date&type=channel&key=" + KEY + "&maxResults=5&q=" + username;
+
+    $.ajax({
+      type:'GET',
+      url: idSearchURL,
+      success: showUsers,
+      error: error,
+      dataType: 'jsonp'
+    });
+
+  });
+
   $('#trailFinder').on('submit', function(e){
   	e.preventDefault(); //atm let's not reload the page
       
@@ -35,7 +55,7 @@ $(document).ready(function() {
   	var method = "playlistItems"; //We will want to search in a specific playlist
   	var playlistId = "PL26112E48392C500F" //The Id of the playlist we want to search in !!NEEDS TO BE ALTERED SO IT ACCEPTS DATA FROM THE USER!!
   	var part = "snippet" //include more information e.g. preview pictures
-  	var maxResults = 50; //Max. results to fetch [1-50]
+  	var maxResults = 5; //Max. results to fetch [1-50]
   	var fullUrl = BASE + "/" + method + "?playlistId=" + playlistId + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
   	
   	//Make an async call to youtubes API v.3
@@ -49,10 +69,17 @@ $(document).ready(function() {
   });
 })
 
-function showVideo (vID) {
-  $("#viewer").css("visibility", "visible")
-  $("#video").attr("src", "https://www.youtube.com/embed/videoseries?list="+vID+"&index=1");
+
+// this will go through the users 
+function showUsers(data) {
+  var items=data.items;
+  for (var key in items){
+    var user = items[key];
+    console.log("channel ID: " + user.snippet.channelId);
+  }
 }
+
+
 
 //Youtube-search callback
 function parseYoutubeJSON(data){
@@ -66,14 +93,21 @@ function parseYoutubeJSON(data){
 		var description = list.snippet.description; //Description of playlist
 		var date = list.snippet.publishedAt; //Date when the playlist was created
 		var image = list.snippet.thumbnails.high.url; //High res preview image of the playlist
-		
+
+
     console.log("images: "+ image);
     $('#filmstrip').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
+
+    //console.log("images: "+ image);
+    $('#main').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
     
 		//Check if all data is correct 
 		//console.log("id: " + id + "cTitle: " + cTitle + "title: " + title + "description: " + description + "date: " + date + "image: " + image)
-		//https://www.youtube.com/embed/videoseries?list=PL9C5815B418D1508E&index=1 //Url format for calling
+		//https://www.youtube.com/embed/videoseries?list=PL9C5815B418D1508E&index=0 //Url format for calling
 		
+    $("#viewer").css("visibility", "visible")
+    $("#video").attr("src", "http://www.youtube.com/embed/videoseries?list="+id+"&index=0");
+    $("#vInfo").val(title);
 	}
 	
 }
@@ -96,9 +130,10 @@ function parseYoutubePLJSON(data){
 		
 		//Check if all data is correct 
 		//console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
-		//https://www.youtube.com/watch?v=1XYgtSCHvp4&list=PL26112E48392C500F&index=1 //Url format for calling
+		//https://www.youtube.com/watch?v=1XYgtSCHvp4&list=PL26112E48392C500F&index=0 //Url format for calling
 		
-    showVideo(id);
+    
+
 
 	}
 }
