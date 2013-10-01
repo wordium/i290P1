@@ -18,11 +18,26 @@ header {
 
 
 /*** filmstrip preview ***/
-#filmstrip li {
+/* #filmstrip li {
   display: inline;
   height: auto;
+} */
+
+#findPlaylists li {
+  display: inline;
+  vertical-align: top;
 }
 
+#findPlaylists ul{
+  width: 10em;
+  height: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+}
+
+
+}
 
 /*** form ***/
 #trailFinder {
