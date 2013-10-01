@@ -3,53 +3,56 @@ var BASE = "https://www.googleapis.com/youtube/v3"; //We use version three of th
 
 $(document).ready(function() {
   $('#trailFinder').on('submit', function(e){
-	e.preventDefault(); //atm let's not reload the page
-    var username, password, playlist;
+  	e.preventDefault(); //atm let's not reload the page
+      
+    var searchterm = $('#searchterm').val();
 
-    username = $('#targetUser').val();
-    playlist = $('#playlist').val();
+    console.log("searchterm: " + searchterm);
+  	
+  	/*Performing the google search*/
+  	//Parameters
+  	var part = "snippet"; //include more information e.g. preview pictures
+  	var order = "date"; //ordering (date, rating, relevance, title, videoCount or viewCount)
+  	var type = "playlist"; //type of videos (channel, playlist or video)
+  	var maxResults = 5; //Max. results to fetch [1-50]
+  	var method = "search" //We will only be searching content
 
-    console.log("username: " + username + ", playlist: " + playlist);
-	
-	/*Performing the google search*/
-	//Parameters
-	var part = "snippet"; //include more information e.g. preview pictures
-	var order = "viewCount"; //ordering (date, rating, relevance, title, videoCount or viewCount)
-	var type = "playlist"; //type of videos (channel, playlist or video)
-	var maxResults = 20; //Max. results to fetch [1-50]
-	var method = "search" //We will only be searching content
-	var q = "cats"; //Query string !!NEEDS TO BE ALTERED SO IT ACCEPTS DATA FROM THE USER!!
-	var fullUrl = BASE + "/" + method + "?part=" + part + "&order=" + order + "&type=" + type + "&key=" + KEY + "&maxResults=" + maxResults + "&q=" + q;
-	
-	//Make an async call to youtubes API v.3
-	$.ajax({
-		type: "GET",
-		url: fullUrl,
-		success: parseYoutubeJSON,
-		error: error,
-		dataType: "json"
-	});
-	
-	
-	//One of the playlists has been clicked, preview all videos in it
-	// !!NEEDS TO BE CALLED FROM THE GUI, MAYBE BY CLICKING ON FX. A PREVIEW PIC!!
-	/*Performing youtube-playlist search*/
-	var method = "playlistItems"; //We will want to search in a specific playlist
-	var playlistId = "PL26112E48392C500F" //The Id of the playlist we want to search in !!NEEDS TO BE ALTERED SO IT ACCEPTS DATA FROM THE USER!!
-	var part = "snippet" //include more information e.g. preview pictures
-	var maxResults = 50; //Max. results to fetch [1-50]
-	var fullUrl = BASE + "/" + method + "?playlistId=" + playlistId + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
-	
-	//Make an async call to youtubes API v.3
-	$.ajax({
-		type: "GET",
-		url: fullUrl,
-		success: parseYoutubePLJSON,
-		error: error,
-		dataType: "json"
-	});
+  	var fullUrl = BASE + "/" + method + "?part=" + part + "&order=" + order + "&type=" + type + "&key=" + KEY + "&maxResults=" + maxResults + "&q=" + searchterm;
+  	
+  	//Make an async call to youtubes API v.3
+  	$.ajax({
+  		type: "GET",
+  		url: fullUrl,
+  		success: parseYoutubeJSON,
+  		error: error,
+  		dataType: "jsonp"
+  	});
+  	
+  	
+  	//One of the playlists has been clicked, preview all videos in it
+  	// !!NEEDS TO BE CALLED FROM THE GUI, MAYBE BY CLICKING ON FX. A PREVIEW PIC!!
+  	/*Performing youtube-playlist search*/
+  	var method = "playlistItems"; //We will want to search in a specific playlist
+  	var playlistId = "PL26112E48392C500F" //The Id of the playlist we want to search in !!NEEDS TO BE ALTERED SO IT ACCEPTS DATA FROM THE USER!!
+  	var part = "snippet" //include more information e.g. preview pictures
+  	var maxResults = 50; //Max. results to fetch [1-50]
+  	var fullUrl = BASE + "/" + method + "?playlistId=" + playlistId + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
+  	
+  	//Make an async call to youtubes API v.3
+  	$.ajax({
+  		type: "GET",
+  		url: fullUrl,
+  		success: parseYoutubePLJSON,
+  		error: error,
+  		dataType: "jsonp"
+  	});
   });
 })
+
+function showVideo (vID) {
+  $("#viewer").css("visibility", "visible")
+  $("#video").attr("src", "https://www.youtube.com/embed/videoseries?list="+vID+"&index=1");
+}
 
 //Youtube-search callback
 function parseYoutubeJSON(data){
@@ -64,6 +67,9 @@ function parseYoutubeJSON(data){
 		var date = list.snippet.publishedAt; //Date when the playlist was created
 		var image = list.snippet.thumbnails.high.url; //High res preview image of the playlist
 		
+    console.log("images: "+ image);
+    $('#main').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
+    
 		//Check if all data is correct 
 		//console.log("id: " + id + "cTitle: " + cTitle + "title: " + title + "description: " + description + "date: " + date + "image: " + image)
 		//https://www.youtube.com/embed/videoseries?list=PL9C5815B418D1508E&index=1 //Url format for calling
@@ -92,6 +98,8 @@ function parseYoutubePLJSON(data){
 		//console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
 		//https://www.youtube.com/watch?v=1XYgtSCHvp4&list=PL26112E48392C500F&index=1 //Url format for calling
 		
+    showVideo(id);
+
 	}
 }
 

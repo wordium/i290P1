@@ -34,10 +34,14 @@ header {
 /*** videos ***/
 #viewer {
   visibility: hidden;
-  width: 420px;
+  width: 540px;
   height: 315px;
   margin: auto auto;
   padding-top: 35px;
+}
+
+#viewer div {
+  display: inline;
 }
 
 /*** footer ***/
