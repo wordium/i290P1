@@ -28,7 +28,7 @@ header {
   vertical-align: top;
 }
 
-#findPlaylists ul{
+.previewThumb ul{
   width: 10em;
   height: auto;
   padding-left: 1em;
