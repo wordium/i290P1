@@ -8,7 +8,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     var username = $('#username').val();
-    console.log('username' + username);
+    console.log('username: ' + username);
 
     var idSearchURL = BASE + "/search?part=snippet&order=date&type=channel&key=" + KEY + "&maxResults=5&q=" + username;
 
@@ -67,9 +67,18 @@ $(document).ready(function() {
 // this will go through the users 
 function showUsers(data) {
   var items=data.items;
+
+  $('#foundUsers').empty(); //clearing the ul so that we can add a new set
+  $('#username').val("");
+
   for (var key in items){
     var user = items[key];
-    console.log("channel ID: " + user.snippet.channelId);
+    var title = user.snippet.title;
+    var image = user.snippet.thumbnails.default.url;
+    var description = user.snippet.description;
+
+    $('#foundUsers').append('<li><img src="'+image+'" class="users" alt="'+title+'"><br>' + 
+                    title + '<br>' + description + '</li>');
   }
 }
 

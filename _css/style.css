@@ -12,6 +12,7 @@ header {
   text-align: center;
 }
 
+/* we should put this on a specific image class instead of all images */
 img{
   width: 11em;
   height: auto;
@@ -34,8 +35,16 @@ img{
 /*** content-blocks ***/
 #findUsers{
 	width: 20%;
+  min-height: 300px;
 	display: inline-block;
+  border-right: 2px solid black;
 }
+
+.users {
+  width: 32px;
+  height: 32px;
+}
+
 #findPlaylists {
 	width: 20%;
 	display: inline-block;
@@ -59,17 +68,6 @@ img{
   vertical-align: top;
   list-style: none;
 }
-
-/*** form ***/
-#trailFinder {
-  width: 300px;
-  margin: auto auto;
-}
-
-#trailFinder input {
-  float: left;
-}
-
 
 /*** videos ***/
 #viewer {
