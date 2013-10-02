@@ -18,7 +18,26 @@ header h6 {
   margin: 0;
 }
 
-img {
+button {
+  margin-left: 33%;
+}
+
+ul {
+  padding: 0;
+  margin-top: 5px;
+  border-left: 10px dotted black;
+  border-right: 10px dotted black;
+}
+
+li {
+  list-style: none;
+  background-color: #ccc;
+  padding: 10px;
+  border: 5px solid black;
+}
+
+li:first{
+  border-top: 10px solid black;
 }
 
 label {
@@ -48,23 +67,8 @@ label {
 }
 
 #foundUsers {
-  padding: 0;
-  margin-top: 5px;
-  border-left: 10px dotted black;
-  border-right: 10px dotted black;
   width: 125px;
   margin: auto auto;
-}
-
-#foundUsers li {
-  list-style: none;
-  background-color: #ccc;
-  padding: 10px;
-  border: 5px solid black;
-}
-
-#foundUsers li:first{
-  border-top: 10px solid black;
 }
 
 .users {
