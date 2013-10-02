@@ -14,7 +14,7 @@ header {
 
 
 img{
-  width: 10em;
+  width: 11em;
   height: auto;
   padding-left: 1em;
   padding-right: 1em;
@@ -39,6 +39,8 @@ img{
 	display: inline-block;
   background: #eee;
 }
+
+
 #trailViewer{
 	width: 33%;
 	display: inline-block;
