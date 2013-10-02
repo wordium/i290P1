@@ -46,6 +46,12 @@ img{
   height: 32px;
 }
 
+.userbtn {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 /*** Playlist Browser ***/
 #findPlaylists {
 	width: 20%;

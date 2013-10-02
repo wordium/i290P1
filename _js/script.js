@@ -50,9 +50,13 @@ function showUsers(data) {
     var description = user.snippet.description;
     var cID = user.id.channelId;
 
-    $('#foundUsers').append('<li><button id="' + cID + '"> <img src="'+image+'" class="users" alt="'+title+'"></button>' + 
+    $('#foundUsers').append('<li><button id="' + cID + '" class="userbtn"> <img src="'+image+'" class="users" alt="'+title+'"></button>' + 
                     '<label for="'+cID+'">' +title + '<br>' + description + '</label></li>');
   }
+
+  $('.userbtn').on('click', function() {
+    getPlaylist($(this).attr('id'));
+  })
 }
 
 // Find Playlist by given id
