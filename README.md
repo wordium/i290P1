@@ -9,7 +9,7 @@ Team members and roles:
  - Sandra Helsley: HTML base structure, CSS styles, JS functionality
  - Sydney Friedman: HTML/CSS styling, general scripting
 
-Technologies used: JavaScript/jQuery, HTML, YouTube API
+Technologies used: JavaScript/jQuery, HTML, YouTube API, CSS
 
 Link to demo version: http://people.ischool.berkeley.edu/~syh/info290ta/p1/
 
@@ -17,5 +17,5 @@ Known bugs:
  - Currently no error messages if no user exists, or if the user does not have accessible playlists
  - Playlist retrieval can be a bit laggy
  - Trail finder is limited to finding a max of 50 playlists due to API restrictions.
-   - On a related note, this is not exactly a bug, but because of space issues we only show a max of 11 videos in one playlist.
+ - On a related note, this is not exactly a bug, but because of space issues we only show a max of 11 videos in one playlist.
  
