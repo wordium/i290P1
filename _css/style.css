@@ -12,7 +12,8 @@ header {
   text-align: center;
 }
 
-/* we should put this on a specific image class instead of all images */
+/**change**/
+
 img{
   width: 11em;
   height: auto;
@@ -23,21 +24,21 @@ img{
 
 #main{
 	width: 1240px;
-  min-height: 300px;
+  	min-height: 300px;
 	margin: auto;
 	position: relative;
 }
 
-#main > div {
+#main div {
   float: left;
 }
 
 /*** User Finder ***/
 #findUsers{
 	width: 20%;
-  min-height: 300px;
+  	min-height: 300px;
 	display: inline-block;
-  border-right: 2px solid black;
+  	border-right: 2px solid black;
 }
 
 .users {
@@ -52,6 +53,13 @@ img{
   background: #eee;
 }
 
+.prieviewThumbs{
+  width: 11em;
+  height: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+}
 
 #trailViewer{
 	width: 50%;

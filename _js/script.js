@@ -63,6 +63,9 @@ function getPlaylist(id){
   	var maxResults = 7; //Max. results to fetch [1-50]
   	var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
 	
+  $('#findPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
+
+
 	//Make an async call to youtubes API v.3
   	$.ajax({
   		type: "GET",
