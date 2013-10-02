@@ -8,10 +8,9 @@ $(document).ready(function() {
     e.preventDefault();
 
     var username = $('#username').val();
-    console.log('username: ' + username);
-
     var idSearchURL = BASE + "/search?part=snippet&order=date&type=channel&key=" + KEY + "&maxResults=5&q=" + username;
 
+    //ajax call to find users of the specified username (usernames are not unique)
     $.ajax({
       type:'GET',
       url: idSearchURL,
@@ -19,56 +18,29 @@ $(document).ready(function() {
       error: error,
       dataType: 'jsonp'
     });
-
-  });
-
-  $('#trailFinder').on('submit', function(e){
-  	e.preventDefault(); //atm let's not reload the page
-      
-    var searchterm = $('#searchterm').val();
-
-    console.log("searchterm: " + searchterm);
-  	
-  	/*Performing the google search*/
-  	//Parameters
-  	var part = "snippet"; //include more information e.g. preview pictures
-  	var order = "date"; //ordering (date, rating, relevance, title, videoCount or viewCount)
-  	var type = "playlist"; //type of videos (channel, playlist or video)
-  	var maxResults = 5; //Max. results to fetch [1-50]
-  	var method = "search" //We will only be searching content
-
-  	var fullUrl = BASE + "/" + method + "?part=" + part + "&order=" + order + "&type=" + type + "&key=" + KEY + "&maxResults=" + maxResults + "&q=" + searchterm;
-  	
-  	//Make an async call to youtubes API v.3
-  	$.ajax({
-  		type: "GET",
-  		url: fullUrl,
-  		success: parseYoutubeJSON,
-  		error: error,
-  		dataType: "jsonp"
-  	});  	
   });
   
-  //Click on an item fromt the playlist-field
+  //Click on an item from the playlist-field
   $(document).on("click", ".playlistItem", function(){
-	var id = $(this).find(".playlistId").text();
-	var title = $(this).find(".playlistTitle").text();
-	$(".trailName").text(title);
-	getPlaylist(id);
+  	var id = $(this).find(".playlistId").text();
+  	var title = $(this).find(".playlistTitle").text();
+  	$(".trailName").text(title);
+  	getPlaylist(id);
   })
+
   //Click on an item from the video-preview-field
   $(document).on("click", ".playlistVideo", function(){
-	var id = $(this).find(".pl_videoId").text();
-	getVideo(id);
+  	var id = $(this).find(".pl_videoId").text();
+  	getVideo(id);
   })
 })
 
 
-// this will go through the users 
+// this will go show users that are found from the request 
 function showUsers(data) {
   var items=data.items;
 
-  $('#foundUsers').empty(); //clearing the ul so that we can add a new set
+  $('#foundUsers').empty(); //clearing the ul so that we can add a new set, after a search
   $('#username').val("");
 
   for (var key in items){
@@ -76,9 +48,10 @@ function showUsers(data) {
     var title = user.snippet.title;
     var image = user.snippet.thumbnails.default.url;
     var description = user.snippet.description;
+    var cID = user.id.channelId;
 
-    $('#foundUsers').append('<li><img src="'+image+'" class="users" alt="'+title+'"><br>' + 
-                    title + '<br>' + description + '</li>');
+    $('#foundUsers').append('<li><button id="' + cID + '"> <img src="'+image+'" class="users" alt="'+title+'"></button>' + 
+                    '<label for="'+cID+'">' +title + '<br>' + description + '</label></li>');
   }
 }
 
@@ -167,3 +140,33 @@ function parseYoutubePLJSON(data){
 function error(e){
 	console.log("ERROR: " + e);
 }
+
+
+//I don't think we are using this any more since there is no more #trailFinder
+
+  $('#trailFinder').on('submit', function(e){
+    e.preventDefault(); //atm let's not reload the page
+      
+    var searchterm = $('#searchterm').val();
+
+    console.log("searchterm: " + searchterm);
+    
+    /*Performing the google search*/
+    //Parameters
+    var part = "snippet"; //include more information e.g. preview pictures
+    var order = "date"; //ordering (date, rating, relevance, title, videoCount or viewCount)
+    var type = "playlist"; //type of videos (channel, playlist or video)
+    var maxResults = 5; //Max. results to fetch [1-50]
+    var method = "search" //We will only be searching content
+
+    var fullUrl = BASE + "/" + method + "?part=" + part + "&order=" + order + "&type=" + type + "&key=" + KEY + "&maxResults=" + maxResults + "&q=" + searchterm;
+    
+    //Make an async call to youtubes API v.3
+    $.ajax({
+      type: "GET",
+      url: fullUrl,
+      success: parseYoutubeJSON,
+      error: error,
+      dataType: "jsonp"
+    });   
+  });
