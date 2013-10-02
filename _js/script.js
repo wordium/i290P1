@@ -69,8 +69,8 @@ function showUsers(data) {
     //3. ajax call using the URL above
     $.ajax({
       type: "GET",
-      url: , //4. put in the URL that we formed above
-      success: , //5. this is the function that we want to call when the ajax request is successful. i.e., get those playlists
+      url: , playlistURL //4. put in the URL that we formed above
+      success: ,  getPlaylist//5. this is the function that we want to call when the ajax request is successful. i.e., get those playlists
       error: error,
       dataType: "jsonp"
     });
