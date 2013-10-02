@@ -6,18 +6,9 @@ $(document).ready(function() {
   // getting users
   $("#findUserForm").on('submit', function(e){
     e.preventDefault();
-
-    var username = $('#username').val();
-    var idSearchURL = BASE + "/search?part=snippet&order=date&type=channel&key=" + KEY + "&maxResults=5&q=" + username;
-
-    //ajax call to find users of the specified username (usernames are not unique)
-    $.ajax({
-      type:'GET',
-      url: idSearchURL,
-      success: showUsers,
-      error: error,
-      dataType: 'jsonp'
-    });
+	
+	var username = $('#username').val();
+	 getUsers(username);
   });
 
   //Click on an item from the playlist-field
@@ -35,13 +26,25 @@ $(document).ready(function() {
   })
 })
 
+function getUsers(username){
+    var idSearchURL = BASE + "/search?part=snippet&order=date&type=channel&key=" + KEY + "&maxResults=5&q=" + username;
+
+    //ajax call to find users of the specified username (usernames are not unique)
+    $.ajax({
+      type:'GET',
+      url: idSearchURL,
+      success: showUsers,
+      error: error,
+      dataType: 'jsonp'
+    });
+}
 
 // this will show users that are found from the request form 
 function showUsers(data) {
   var items=data.items;
 
   $('#foundUsers').empty(); //clearing the ul so that we can add a new set, after a search
-  $('#username').val("");
+  $('#username').val("");  //cleaning the input filed after the search
 
   for (var key in items){ //for each user in our list
     //getting relevant information
@@ -59,7 +62,7 @@ function showUsers(data) {
   //add event listener so that we can see playlists of the user that has been clicked.
   //SYDNEY start here!
   $('.userbtn').on('click', function() {
-
+	
     //1. this is the channel ID, I stuck it as the hopefully unique ID for each person
     var channelID = $(this).attr('id'); 
 
@@ -102,18 +105,9 @@ function getPlaylist(data){
   var method = "playlistItems"; //We will want to search in a specific playlist
   var part = "snippet" //include more information e.g. preview pictures
   var maxResults = 7; //Max. results to fetch [1-50]
-  var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
+  var fullUrl = BASE + "/" + method + "?playlistId=" + pID + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
 	
-  $('#foundPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
-
-	//Make an async call to youtubes API v.3
-  	$.ajax({
-  		type: "GET",
-  		url: fullUrl,
-  		success: parseYoutubePLJSON,
-  		error: error,
-  		dataType: "jsonp"
-  	});
+  $('#foundPlaylists').append("<img src='" + pImageURL + "'>"); // getting the playlist preview; change the div to the appropriate one to style
 }
 
 // Find Video by given id
