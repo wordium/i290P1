@@ -41,6 +41,10 @@ img{
   	border-right: 2px solid black;
 }
 
+#foundUsers li {
+  list-style: none;
+}
+
 .users {
   width: 32px;
   height: 32px;

@@ -19,24 +19,24 @@ $(document).ready(function() {
       dataType: 'jsonp'
     });
   });
-  
+
   //Click on an item from the playlist-field
   $(document).on("click", ".playlistItem", function(){
-  	var id = $(this).find(".playlistId").text();
-  	var title = $(this).find(".playlistTitle").text();
-  	$(".trailName").text(title);
-  	getPlaylist(id);
+    var id = $(this).find(".playlistId").text();
+    var title = $(this).find(".playlistTitle").text();
+    $(".trailName").text(title);
+    getPlaylist(id);
   })
 
   //Click on an item from the video-preview-field
   $(document).on("click", ".playlistVideo", function(){
-  	var id = $(this).find(".pl_videoId").text();
-  	getVideo(id);
+    var id = $(this).find(".pl_videoId").text();
+    getVideo(id);
   })
 })
 
 
-// this will go show users that are found from the request 
+// this will show users that are found from the request form 
 function showUsers(data) {
   var items=data.items;
 
@@ -44,6 +44,7 @@ function showUsers(data) {
   $('#username').val("");
 
   for (var key in items){ //for each user in our list
+    //getting relevant information
     var user = items[key];
     var title = user.snippet.title;
     var image = user.snippet.thumbnails.default.url;
@@ -52,27 +53,54 @@ function showUsers(data) {
 
     //add the image with the right information
     $('#foundUsers').append('<li><button id="' + cID + '" class="userbtn"> <img src="'+image+'" class="users" alt="'+title+'"></button>' + 
-                    '<label for="'+cID+'">' +title + '<br>' + description + '</label></li>');
+                    '<label for="'+cID+'">' +title + '</label></li>');
   }
 
   //add event listener so that we can see playlists of the user that has been clicked.
+  //SYDNEY start here!
   $('.userbtn').on('click', function() {
-    getPlaylist($(this).attr('id'));
+
+    //1. this is the channel ID, I stuck it as the hopefully unique ID for each person
+    var channelID = $(this).attr('id'); 
+
+    //2. this is creating the URL that we are going to call to get that person's playlists
+    var playlistURL = BASE + "/search?part=snippet&order=date&type=playlist&key=" + KEY + "&maxResults=5&channelId=" + channelID;
+
+    //3. ajax call using the URL above
+    $.ajax({
+      type: "GET",
+      url: , //4. put in the URL that we formed above
+      success: , //5. this is the function that we want to call when the ajax request is successful. i.e., get those playlists
+      error: error,
+      dataType: "jsonp"
+    });
   })
 }
 
-// Find Playlist by given id
-function getPlaylist(id){
-  var items=id.items;
+// Find Playlist
+function getPlaylist(data){
+  //6. this is where we get that data, which will automagically get passed when that function is called above
+  var items=data.items;
 
   $('#foundPlaylist').empty(); //clearing the ul so that we can add a new set, after a search
 
-  	/*Performing youtube-playlist search*/
-  	var method = "playlistItems"; //We will want to search in a specific playlist
-  	var part = "snippet" //include more information e.g. preview pictures
-  	var maxResults = 7; //Max. results to fetch [1-50]
-    var image = user.snippet.default.url
-  	var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
+  //7. now we go through each playlist item in the list
+  for (var key in items){
+    var playlist = items[key]
+    var pID = playlist.id.playlistId;
+    var pTitle = playlist.snippet.title;
+    var pImageURL = playlist.snippet.thumbnails.default.url;
+
+    //8. now we can append the current playlist using the above information, and it will look like this in the end:
+    // <button id = pID><img src = pImageURL></button>
+    // <label for=pID>pTitle</label>
+  }
+
+  /*Performing youtube-playlist search*/
+  var method = "playlistItems"; //We will want to search in a specific playlist
+  var part = "snippet" //include more information e.g. preview pictures
+  var maxResults = 7; //Max. results to fetch [1-50]
+  var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
 	
   $('#foundPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
 
@@ -122,12 +150,6 @@ function parseYoutubePLJSON(data){
 function error(e){
 	console.log("ERROR: " + e);
 }
-
-
-
-
-
-
 
 
 //I don't think we are using this any more since there is no more #trailFinder
