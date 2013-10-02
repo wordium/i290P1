@@ -134,6 +134,7 @@ function parseYoutubeJSON(data){
 
 //Youtube-playlist-search callback
 function parseYoutubePLJSON(data){
+	$(".previewBlock").empty(); //remove old playlist
 	var itemsInList = data.pageInfo.totalResults; //Counts # of videos in playlist, max. 50 visible at a time
 	var items = data.items;
 	for (var key in items){

@@ -12,7 +12,6 @@ header {
   text-align: center;
 }
 
-
 img{
   width: 11em;
   height: auto;
@@ -23,24 +22,29 @@ img{
 
 #main{
 	width: 1240px;
+  min-height: 300px;
 	margin: auto;
 	position: relative;
 }
 
+#main > div {
+  float: left;
+}
+
 /*** content-blocks ***/
 #findUsers{
-	width: 33%;
+	width: 20%;
 	display: inline-block;
 }
 #findPlaylists {
-	width: 33%;
+	width: 20%;
 	display: inline-block;
   background: #eee;
 }
 
 
 #trailViewer{
-	width: 33%;
+	width: 50%;
 	display: inline-block;
 }
 
@@ -128,4 +132,5 @@ footer {
   padding: 10px;
   background-color: #eecbad;
   text-align: center;
+  display: block;
 }
