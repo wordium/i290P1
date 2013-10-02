@@ -18,6 +18,10 @@ header h6 {
   margin: 0;
 }
 
+h4 {
+  text-align: center;
+}
+
 #logo {
   height: 40px;
   vertical-align: bottom;
@@ -62,10 +66,17 @@ label {
 	width: 1240px;
   min-height: 300px;
 	position: relative;
+  margin: auto auto;
 }
 
 #main div {
   float: left;
+}
+
+#findUsers, #findPlaylists {
+  min-height: 500px;
+  min-width: 20%;
+  border-right: 1px solid black;
 }
 
 /*** User Finder ***/
@@ -74,7 +85,7 @@ label {
 }
 
 #foundUsers{
-  left: 25px;
+  left: 50px;
 }
 
 .users {
@@ -89,11 +100,6 @@ label {
 }
 
 /*** Playlist Browser ***/
-#findPlaylists {
-	width: 20%;
-	display: inline-block;
-}
-
 .previewThumbs{
   width: 11em;
   height: auto;
@@ -105,11 +111,16 @@ label {
 #trailViewer{
 	width: 50%;
 	display: inline-block;
+  margin-left: 5%;
 }
 
 .playlistItem .playlistId{
 	display: none;
   position: center;
+}
+
+#foundPlaylist {
+  margin-left: 28px;
 }
 
 .playlistItem {
@@ -150,6 +161,7 @@ label {
 .previewBlock img{
 	width: 50px;
 	padding: 0px;
+  margin: 1px;
 	border-top: 5px dotted black;
 	border-bottom: 5px dotted black;
 	display:block;

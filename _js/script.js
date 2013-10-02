@@ -67,7 +67,7 @@ function getPLItems(id){
 	//Performing youtube-playlist search
   	var method = "playlistItems"; //We will want to search in a specific playlist
   	var part = "snippet" //include more information e.g. preview pictures
-  	var maxResults = 7; //Max. results to fetch [1-50]
+  	var maxResults = 11; //Max. results to fetch [1-50]
   	var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
 
 	//Make an async call to youtubes API v.3
