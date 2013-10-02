@@ -43,17 +43,19 @@ function showUsers(data) {
   $('#foundUsers').empty(); //clearing the ul so that we can add a new set, after a search
   $('#username').val("");
 
-  for (var key in items){
+  for (var key in items){ //for each user in our list
     var user = items[key];
     var title = user.snippet.title;
     var image = user.snippet.thumbnails.default.url;
     var description = user.snippet.description;
     var cID = user.id.channelId;
 
+    //add the image with the right information
     $('#foundUsers').append('<li><button id="' + cID + '" class="userbtn"> <img src="'+image+'" class="users" alt="'+title+'"></button>' + 
                     '<label for="'+cID+'">' +title + '<br>' + description + '</label></li>');
   }
 
+  //add event listener so that we can see playlists of the user that has been clicked.
   $('.userbtn').on('click', function() {
     getPlaylist($(this).attr('id'));
   })
