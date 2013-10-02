@@ -71,7 +71,6 @@ function getPlaylist(id){
 	
   $('#findPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
 
-
 	//Make an async call to youtubes API v.3
   	$.ajax({
   		type: "GET",
@@ -92,37 +91,6 @@ function getVideo(id_position){
 	$("#ytplayer").attr("src", "https://www.youtube.com/embed/?listType=playlist&list=" + id_position);
 }
 
-
-//Youtube-search callback
-function parseYoutubeJSON(data){
-	//console.log(data);
-	var items = data.items;
-	for (var key in items){
-		var list = items[key];
-		var id = list.id.playlistId; //Specific ID for the playlist
-		var cTitle = list.snippet.channelTitle; //is the channel title, seems to be of lower readability than "title"
-		var title = list.snippet.title; //Title of playlist
-		var description = list.snippet.description; //Description of playlist
-		var date = list.snippet.publishedAt; //Date when the playlist was created
-		var image = list.snippet.thumbnails.high.url; //High res preview image of the playlist
-
-
-    console.log("images: "+ image);
-    $('#findPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
-
-    //console.log("images: "+ image);
-    
-		//Check if all data is correct 
-		//console.log("id: " + id + "cTitle: " + cTitle + "title: " + title + "description: " + description + "date: " + date + "image: " + image)
-		//https://www.youtube.com/embed/videoseries?list=PL9C5815B418D1508E&index=0 //Url format for calling
-		
-    $("#viewer").css("visibility", "visible")
-    $("#video").attr("src", "http://www.youtube.com/embed/videoseries?list="+id+"&index=0");
-    $("#vInfo").val(title);
-	}
-	
-}
-
 //Youtube-playlist-search callback
 function parseYoutubePLJSON(data){
 	$(".previewBlock").empty(); //remove old playlist
@@ -131,11 +99,11 @@ function parseYoutubePLJSON(data){
 	for (var key in items){
 		var video = items[key];
 		var id = video.id; //Specific ID for the video including the playlistId
-		var cId = video.snippet.resourceId.videoId; //Specific ID for the video excluding the playlistId
-		var description = video.snippet.description; //Description of the video !NB can be very long!
-		var playlistId = video.snippet.playlistId; //The Id of the playlist this video is in, redundant
+		//var cId = video.snippet.resourceId.videoId; //Specific ID for the video excluding the playlistId
+		//var description = video.snippet.description; //Description of the video !NB can be very long!
+		//var playlistId = video.snippet.playlistId; //The Id of the playlist this video is in, redundant
 		var position = video.snippet.position; //The position of the video in the playlist
-		var date = video.snippet.publishedAt; //The date when the video was uploaded
+		//var date = video.snippet.publishedAt; //The date when the video was uploaded
 		var image = video.snippet.thumbnails.high.url; //High res preview image of the playlist
 		var title = video.snippet.title; //Title of the video
 		
@@ -151,7 +119,43 @@ function error(e){
 }
 
 
+
+
+
+
+
+
 //I don't think we are using this any more since there is no more #trailFinder
+
+//Youtube-search callback
+function parseYoutubeJSON(data){
+  //console.log(data);
+  var items = data.items;
+  for (var key in items){
+    var list = items[key];
+    var id = list.id.playlistId; //Specific ID for the playlist
+    var cTitle = list.snippet.channelTitle; //is the channel title, seems to be of lower readability than "title"
+    var title = list.snippet.title; //Title of playlist
+    var description = list.snippet.description; //Description of playlist
+    var date = list.snippet.publishedAt; //Date when the playlist was created
+    var image = list.snippet.thumbnails.high.url; //High res preview image of the playlist
+
+
+    console.log("images: "+ image);
+    $('#findPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
+
+    //console.log("images: "+ image);
+    
+    //Check if all data is correct 
+    //console.log("id: " + id + "cTitle: " + cTitle + "title: " + title + "description: " + description + "date: " + date + "image: " + image)
+    //https://www.youtube.com/embed/videoseries?list=PL9C5815B418D1508E&index=0 //Url format for calling
+    
+    $("#viewer").css("visibility", "visible")
+    $("#video").attr("src", "http://www.youtube.com/embed/videoseries?list="+id+"&index=0");
+    $("#vInfo").val(title);
+  }
+  
+}
 
   $('#trailFinder').on('submit', function(e){
     e.preventDefault(); //atm let's not reload the page
