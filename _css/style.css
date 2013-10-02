@@ -12,14 +12,12 @@ header {
   text-align: center;
 }
 
-/**change**/
+img {
+}
 
-img{
-  width: 11em;
-  height: auto;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 1em;
+label {
+  display: block;
+  text-align: center;
 }
 
 #main{
@@ -37,12 +35,21 @@ img{
 #findUsers{
 	width: 20%;
   	min-height: 300px;
-	display: inline-block;
-  	border-right: 2px solid black;
+}
+
+#foundUsers {
+  padding: 0;
+  border-left: 10px dotted black;
+  border-right: 10px dotted black;
+  width: 125px;
+  margin: auto auto;
 }
 
 #foundUsers li {
   list-style: none;
+  background-color: #ccc;
+  padding: 10px;
+  border: 5px solid black;
 }
 
 .users {
