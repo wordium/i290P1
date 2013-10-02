@@ -50,7 +50,8 @@ function getUsers(username){
 function getPlaylists(o){
     //Get the channel Id and create URL
     var channelID = $(o).attr('id'); 
-    var playlistURL = BASE + "/search?part=snippet&order=date&type=playlist&key=" + KEY + "&maxResults=5&channelId=" + channelID;
+    var maxPlaylists = 50;
+    var playlistURL = BASE + "/search?part=snippet&order=date&type=playlist&key=" + KEY + "&maxResults="+maxPlaylists+"&channelId=" + channelID;
 	console.log(playlistURL)
 
     $.ajax({
