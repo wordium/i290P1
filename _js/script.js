@@ -63,13 +63,17 @@ function showUsers(data) {
 
 // Find Playlist by given id
 function getPlaylist(id){
+  var items=id.items;
+
+  $('#foundPlaylist').empty(); //clearing the ul so that we can add a new set, after a search
+
   	/*Performing youtube-playlist search*/
   	var method = "playlistItems"; //We will want to search in a specific playlist
   	var part = "snippet" //include more information e.g. preview pictures
   	var maxResults = 7; //Max. results to fetch [1-50]
   	var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
 	
-  $('#findPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
+  $('#foundPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
 
 	//Make an async call to youtubes API v.3
   	$.ajax({
