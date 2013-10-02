@@ -97,8 +97,8 @@ function getPlaylist(data){
     //8. now we can append the current playlist using the above information, and it will look like this in the end:
     // <button id = pID><img src = pImageURL></button>
     // <label for=pID>pTitle</label>
-    $("#foundPlaylist").append("<li><button id=" + pID + "<img src=" + pImageURL + "></button" +
-              'label for=' + pID + ">" + title + "</label</li>");
+    $("#foundPlaylist").append('<li><button id="' + pID + '"<img src="' + pImageURL + '"></button' +
+              '<label for="' + pID + '">"' + title + '</label></li>');
   } 
 
   /*Performing youtube-playlist search*/
