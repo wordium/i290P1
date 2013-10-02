@@ -11,6 +11,18 @@ header {
   padding:10px;
   text-align: center;
 }
+
+
+img{
+  width: 10em;
+  height: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+}
+
+
+}
 #main{
 	width: 960px;
 	margin: auto;
@@ -25,6 +37,7 @@ header {
 #findPlaylists {
 	width: 33%;
 	display: inline-block;
+  background: #eee;
 }
 #trailViewer{
 	width: 33%;
@@ -36,23 +49,11 @@ header {
 }
 
 
-/*** filmstrip preview ***/
-/* #filmstrip li {
-  display: inline;
-  height: auto;
-} */
 
 #findPlaylists li {
   display: inline;
   vertical-align: top;
-}
-
-.previewThumb ul{
-  width: 10em;
-  height: auto;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 1em;
+  list-style: none;
 }
 
 
