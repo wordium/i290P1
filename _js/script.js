@@ -86,7 +86,7 @@ function getPlaylist(data){
 
   //7. now we go through each playlist item in the list
   for (var key in items){
-    var playlist = items[key]
+    var playlist = items[key];
     var pID = playlist.id.playlistId;
     var pTitle = playlist.snippet.title;
     var pImageURL = playlist.snippet.thumbnails.default.url;
@@ -94,9 +94,9 @@ function getPlaylist(data){
     //8. now we can append the current playlist using the above information, and it will look like this in the end:
     // <button id = pID><img src = pImageURL></button>
     // <label for=pID>pTitle</label>
-    $("#foundPlaylist").append("<button id=" + pID "<img src=" + pImageURL + "></button" +
-              'label for=' + pID ">" +title + "</label" )
-  }
+    $("#foundPlaylist").append("<li><button id=" + pID + "<img src=" + pImageURL + "></button" +
+              'label for=' + pID + ">" + title + "</label</li>");
+  } 
 
   /*Performing youtube-playlist search*/
   var method = "playlistItems"; //We will want to search in a specific playlist
