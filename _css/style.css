@@ -21,10 +21,8 @@ img{
   padding-top: 1em;
 }
 
-
-}
 #main{
-	width: 960px;
+	width: 1120px;
 	margin: auto;
 	position: relative;
 }
@@ -54,9 +52,6 @@ img{
   display: inline;
   vertical-align: top;
   list-style: none;
-}
-
-
 }
 
 /*** form ***/
