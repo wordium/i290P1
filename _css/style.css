@@ -81,22 +81,45 @@ img{
 }
 
 /***Trail viewer***/
+#trailViewer  h1{
+	text-align: center;
+	font-size: 2em;
+}
 .previewBlock .playlistVideo{
 	display: inline-block;
 	cursor: pointer;
+	border: 2px solid black;
 }
 .previewBlock{
 	margin: auto;
-	border: 2px solid black;
+	display: inline-block;
 }
 .previewBlock img{
 	width: 50px;
 	padding: 0px;
 	border-top: 5px dotted black;
 	border-bottom: 5px dotted black;
+	display:block;
 }
 .pl_videoId{
 	display: none;
+}
+#ytplayer{
+	height: 100%;
+	width: 100%;
+	border: none;
+}
+.player{
+	height: 335px;
+	width: 100%;
+	background-color: #eee;
+	display: inline-block;
+}
+.previewBox{
+	background-color: #eee;
+	text-align: center;
+	height: 55px;
+	width: 100%;
 }
 
 /*** footer ***/

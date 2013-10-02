@@ -21,17 +21,21 @@
 
     <div id="main">
 
+		 <!-- PLEASE REMOVE IF NOT NEEDED ANYMORE
       <form id="trailFinder" name="trailFinder" method="post">
         <input type="text" name="searchterm" id="searchterm">
         <input type="submit" value="Search for Playlists!">   
       </form>
 
       <h4 id="vInfo"></h4>
-      <div id="viewer">
+	  
+      <div id="viewer" style="display:none">
         <div><button id="vprev">Previous</button></div>
         <div><iframe width="420" height="315" src="" frameborder="0" id="video" allowfullscreen></iframe></div>
         <div><button id="vnext">Next</button></div>
       </div>
+	  
+	  -->
     
 
 
@@ -60,16 +64,18 @@
 		  <div class="playlistItem">
 			<img src="http://www.itp.net/images/content/580233/article/5292-fake-sta_article.jpg" width="100" height="50" />
 			<div class="playlistId">PL26112E48392C500F</div>
+			<div class="playlistTitle">Cats playlist</div>
 		  </div>
         </div>
 
         <div id="trailViewer">
           <!--Tom-->
           <!--TODO: assume you have a playlist, show preview of videos and display the video -->
-		  <h1>This is Tom's block</h1>
-		  <div id="ytplayer"></div>
-		  <div class="previewBlock"></div>
-        </div>
+		  <h1>View trail: <span class="trailName"></span></h1>
+		  <div class="player"></div>
+		  <div class="previewBox">
+		    <div class="previewBlock"></div>
+		  </div>
       </div>
 	</div>
 

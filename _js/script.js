@@ -52,6 +52,8 @@ $(document).ready(function() {
   //Click on an item fromt the playlist-field
   $(document).on("click", ".playlistItem", function(){
 	var id = $(this).find(".playlistId").text();
+	var title = $(this).find(".playlistTitle").text();
+	$(".trailName").text(title);
 	getPlaylist(id);
   })
   //Click on an item from the video-preview-field
@@ -59,12 +61,6 @@ $(document).ready(function() {
 	var id = $(this).find(".pl_videoId").text();
 	getVideo(id);
   })
-  
-  // Load the youtube Player API code
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/player_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 })
 
 
@@ -82,7 +78,7 @@ function getPlaylist(id){
   	/*Performing youtube-playlist search*/
   	var method = "playlistItems"; //We will want to search in a specific playlist
   	var part = "snippet" //include more information e.g. preview pictures
-  	var maxResults = 50; //Max. results to fetch [1-50]
+  	var maxResults = 7; //Max. results to fetch [1-50]
   	var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
 	
 	//Make an async call to youtubes API v.3
@@ -96,17 +92,13 @@ function getPlaylist(id){
 }
 
 // Find Video by given id
-function getVideo(id){
-  	console.log(id);
-	// Replace the 'ytplayer' element with an <iframe> and
-  // YouTube player after the API code downloads.
-  var player = $("#ytplayer");
-    player = new YT.Player('ytplayer', {
-      height: '390',
-      width: '640',
-      videoId: 'M7lc1UVf-VE'
-    });
-  
+function getVideo(id_position){
+	//create player iframe if not available
+	if($("#ytplayer").length == 0){
+		$(".player").append('<iframe id="ytplayer" type="text/html" src="#" allowfullscreen></iframe>');
+	}
+	//Change the src of the iframe to point to the right video
+	$("#ytplayer").attr("src", "https://www.youtube.com/embed/?listType=playlist&list=" + id_position);
 }
 
 
@@ -157,9 +149,8 @@ function parseYoutubePLJSON(data){
 		
 		//Check if all data is correct 
 		//console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
-		//https://www.youtube.com/watch?v=1XYgtSCHvp4&list=PL26112E48392C500F&index=0 //Url format for calling
 		
-		$(".previewBlock").append('<div class="playlistVideo"><img src="' + image + '"/><div class="pl_videoId">' + id + '</div></div>');
+		$(".previewBlock").append('<div class="playlistVideo"><img src="' + image + '"/><div class="pl_videoId">' + playlistId + '&index=' + position + '</div></div>');
 	}
 }
 
