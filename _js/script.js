@@ -71,6 +71,7 @@ function getPlaylist(id){
   	var method = "playlistItems"; //We will want to search in a specific playlist
   	var part = "snippet" //include more information e.g. preview pictures
   	var maxResults = 7; //Max. results to fetch [1-50]
+    var image = user.snippet.default.url
   	var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
 	
   $('#foundPlaylists').append("<img src='" + image + "'>"); // getting the playlist preview; change the div to the appropriate one to style
