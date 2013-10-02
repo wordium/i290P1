@@ -31,6 +31,10 @@ header {
 	display: inline-block;
 }
 
+.playlistItem .playlistId{
+	display: none;
+}
+
 
 /*** filmstrip preview ***/
 /* #filmstrip li {

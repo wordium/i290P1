@@ -46,27 +46,13 @@ $(document).ready(function() {
   		success: parseYoutubeJSON,
   		error: error,
   		dataType: "jsonp"
-  	});
-  	
-  	
-  	//One of the playlists has been clicked, preview all videos in it
-  	// !!NEEDS TO BE CALLED FROM THE GUI, MAYBE BY CLICKING ON FX. A PREVIEW PIC!!
-  	/*Performing youtube-playlist search*/
-  	var method = "playlistItems"; //We will want to search in a specific playlist
-  	var playlistId = "PL26112E48392C500F" //The Id of the playlist we want to search in !!NEEDS TO BE ALTERED SO IT ACCEPTS DATA FROM THE USER!!
-  	var part = "snippet" //include more information e.g. preview pictures
-  	var maxResults = 5; //Max. results to fetch [1-50]
-  	var fullUrl = BASE + "/" + method + "?playlistId=" + playlistId + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
-  	
-  	//Make an async call to youtubes API v.3
-  	$.ajax({
-  		type: "GET",
-  		url: fullUrl,
-  		success: parseYoutubePLJSON,
-  		error: error,
-  		dataType: "jsonp"
-  	});
+  	});  	
   });
+  
+  $(document).on("click", ".playlistItem", function(){
+	var id = $(this).find(".playlistId").text();
+	getPlaylist(id);
+  })
 })
 
 
@@ -77,6 +63,24 @@ function showUsers(data) {
     var user = items[key];
     console.log("channel ID: " + user.snippet.channelId);
   }
+}
+
+// Find Playlist by given id
+function getPlaylist(id){
+  	/*Performing youtube-playlist search*/
+  	var method = "playlistItems"; //We will want to search in a specific playlist
+  	var part = "snippet" //include more information e.g. preview pictures
+  	var maxResults = 50; //Max. results to fetch [1-50]
+  	var fullUrl = BASE + "/" + method + "?playlistId=" + id + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
+	
+	//Make an async call to youtubes API v.3
+  	$.ajax({
+  		type: "GET",
+  		url: fullUrl,
+  		success: parseYoutubePLJSON,
+  		error: error,
+  		dataType: "jsonp"
+  	});
 }
 
 
@@ -113,7 +117,6 @@ function parseYoutubeJSON(data){
 
 //Youtube-playlist-search callback
 function parseYoutubePLJSON(data){
-	console.log(data);
 	var itemsInList = data.pageInfo.totalResults; //Counts # of videos in playlist, max. 50 visible at a time
 	var items = data.items;
 	for (var key in items){
@@ -128,12 +131,8 @@ function parseYoutubePLJSON(data){
 		var title = video.snippet.title; //Title of the video
 		
 		//Check if all data is correct 
-		//console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
+		console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
 		//https://www.youtube.com/watch?v=1XYgtSCHvp4&list=PL26112E48392C500F&index=0 //Url format for calling
-		
-    
-
-
 	}
 }
 
