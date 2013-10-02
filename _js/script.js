@@ -27,7 +27,7 @@ $(document).ready(function() {
 })
 
 function getUsers(username){
-    var idSearchURL = BASE + "/search?part=snippet&order=date&type=channel&key=" + KEY + "&maxResults=5&q=" + username;
+    var idSearchURL = BASE + "/search?part=snippet&type=channel&key=" + KEY + "&maxResults=5&q=" + username;
 
     //ajax call to find users of the specified username (usernames are not unique)
     $.ajax({
@@ -41,6 +41,7 @@ function getUsers(username){
 
 // this will show users that are found from the request form 
 function showUsers(data) {
+console.log(data);	
   var items=data.items;
 
   $('#foundUsers').empty(); //clearing the ul so that we can add a new set, after a search
@@ -98,7 +99,7 @@ function getPlaylist(data){
     // <button id = pID><img src = pImageURL></button>
     // <label for=pID>pTitle</label>
     $("#foundPlaylist").append('<li><button id="' + pID + '"<img src="' + pImageURL + '"></button' +
-              '<label for="' + pID + '">"' + title + '</label></li>');
+              '<label for="' + pID + '">"' + pTitle + '</label></li>');
   } 
 
   /*Performing youtube-playlist search*/
