@@ -42,6 +42,8 @@ ul {
   margin: auto auto;
   position: absolute;
   top: 60px;
+  max-height: 425px;
+  overflow-y: scroll;
 }
 
 li {

@@ -52,7 +52,7 @@ function getPlaylists(o){
     var channelID = $(o).attr('id'); 
     var maxPlaylists = 50;
     var playlistURL = BASE + "/search?part=snippet&order=date&type=playlist&key=" + KEY + "&maxResults="+maxPlaylists+"&channelId=" + channelID;
-	console.log(playlistURL)
+	  //console.log(playlistURL)
 
     $.ajax({
       type: "GET",
@@ -84,7 +84,7 @@ function getPLItems(id){
 /** Ajax callbacks **/
 // this will show users that are found from the request form 
 function showUsers(data) {
-console.log(data);	
+  //console.log(data);	
   var items=data.items;
 
   $('#foundUsers').empty(); //clearing the ul so that we can add a new set, after a search
