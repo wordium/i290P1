@@ -18,6 +18,12 @@ header h6 {
   margin: 0;
 }
 
+#logo {
+  height: 40px;
+  vertical-align: bottom;
+}
+
+/*** user- and playlist-chooser styling ***/
 button {
   margin-left: 33%;
 }
@@ -27,6 +33,11 @@ ul {
   margin-top: 5px;
   border-left: 10px dotted black;
   border-right: 10px dotted black;
+  min-width: 125px;
+  max-width: 140px;
+  margin: auto auto;
+  position: absolute;
+  top: 60px;
 }
 
 li {
@@ -46,11 +57,7 @@ label {
   font-size: .7em;
 }
 
-#logo {
-  height: 40px;
-  vertical-align: bottom;
-}
-
+/*** Main content styling ***/
 #main{
 	width: 1240px;
   min-height: 300px;
@@ -66,9 +73,8 @@ label {
   padding: 15px;
 }
 
-#foundUsers {
-  width: 125px;
-  margin: auto auto;
+#foundUsers{
+  left: 25px;
 }
 
 .users {
@@ -86,10 +92,9 @@ label {
 #findPlaylists {
 	width: 20%;
 	display: inline-block;
-  background: #eee;
 }
 
-.prieviewThumbs{
+.previewThumbs{
   width: 11em;
   height: auto;
   padding-left: 1em;
@@ -107,14 +112,20 @@ label {
   position: center;
 }
 
-
-#findPlaylists li {
-  display: inline;
-  vertical-align: top;
-  list-style: none;
+.playlistItem {
+  min-height: 75px;
 }
 
-/*** videos ***/
+.playlistItem img {
+  margin-left: 5%;
+}
+
+.playlistTitle {
+  text-align: center;
+  font-size: .7em;
+}
+
+/*** Video Players ***/
 #viewer {
   visibility: hidden;
   width: 540px;
@@ -127,11 +138,6 @@ label {
   display: inline;
 }
 
-/***Trail viewer***/
-#trailViewer  h1{
-	text-align: center;
-	font-size: 2em;
-}
 .previewBlock .playlistVideo{
 	display: inline-block;
 	cursor: pointer;
@@ -167,13 +173,4 @@ label {
 	text-align: center;
 	height: 55px;
 	width: 100%;
-}
-
-/*** footer ***/
-footer {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #000;
-  text-align: center;
-  display: block;
 }

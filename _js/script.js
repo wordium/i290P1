@@ -117,7 +117,7 @@ function getPlaylist(data){
     var pImageURL = playlist.snippet.thumbnails.default.url;
 
     //Append current playlist
-	var el = '<div class="playlistItem"><img src="'+ pImageURL +'" width="100" height="50" /><div class="playlistId">'+ pID +'</div><div class="playlistTitle">'+ pTitle +'</div></div>';
+	var el = '<li class="playlistItem"><img src="'+ pImageURL +'" width="100" height="50" /><div class="playlistId">'+ pID +'</div><div class="playlistTitle">'+ pTitle +'</div></li>';
     $("#foundPlaylist").append(el);
   } 
 
