@@ -1,10 +1,6 @@
-
-
-/** styles **/
-
-
+/*** document styles ***/
 body{
-  font-family: 'Bubbler One', sans-serif;
+  font-family: sans-serif;
   font-size: 12px;
 }
 /*** header ***/
@@ -14,6 +10,25 @@ header {
   font-size: 20px;
   padding:10px;
   text-align: center;
+}
+#main{
+	width: 960px;
+	margin: auto;
+	position: relative;
+}
+
+/*** content-blocks ***/
+#findUsers{
+	width: 33%;
+	display: inline-block;
+}
+#findPlaylists {
+	width: 33%;
+	display: inline-block;
+}
+#trailViewer{
+	width: 33%;
+	display: inline-block;
 }
 
 
@@ -61,6 +76,12 @@ header {
 
 #viewer div {
   display: inline;
+}
+
+/***Trail viewer***/
+#trailViewer{
+	width: 33%;
+	float: right;
 }
 
 /*** footer ***/
