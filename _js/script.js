@@ -49,10 +49,22 @@ $(document).ready(function() {
   	});  	
   });
   
+  //Click on an item fromt the playlist-field
   $(document).on("click", ".playlistItem", function(){
 	var id = $(this).find(".playlistId").text();
 	getPlaylist(id);
   })
+  //Click on an item from the video-preview-field
+  $(document).on("click", ".playlistVideo", function(){
+	var id = $(this).find(".pl_videoId").text();
+	getVideo(id);
+  })
+  
+  // Load the youtube Player API code
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 })
 
 
@@ -83,6 +95,19 @@ function getPlaylist(id){
   	});
 }
 
+// Find Video by given id
+function getVideo(id){
+  	console.log(id);
+	// Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player = $("#ytplayer");
+    player = new YT.Player('ytplayer', {
+      height: '390',
+      width: '640',
+      videoId: 'M7lc1UVf-VE'
+    });
+  
+}
 
 
 //Youtube-search callback
@@ -131,8 +156,10 @@ function parseYoutubePLJSON(data){
 		var title = video.snippet.title; //Title of the video
 		
 		//Check if all data is correct 
-		console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
+		//console.log("itemsInList: " + itemsInList + "id: " + id + "cId: " + cId + "title: " + title + "description: " + description + "date: " + date + "image: " + image + "playlistId :" + playlistId + "position: " + position)
 		//https://www.youtube.com/watch?v=1XYgtSCHvp4&list=PL26112E48392C500F&index=0 //Url format for calling
+		
+		$(".previewBlock").append('<div class="playlistVideo"><img src="' + image + '"/><div class="pl_videoId">' + id + '</div></div>');
 	}
 }
 

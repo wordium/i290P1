@@ -22,7 +22,7 @@ img{
 }
 
 #main{
-	width: 1120px;
+	width: 1240px;
 	margin: auto;
 	position: relative;
 }
@@ -81,9 +81,22 @@ img{
 }
 
 /***Trail viewer***/
-#trailViewer{
-	width: 33%;
-	float: right;
+.previewBlock .playlistVideo{
+	display: inline-block;
+	cursor: pointer;
+}
+.previewBlock{
+	margin: auto;
+	border: 2px solid black;
+}
+.previewBlock img{
+	width: 50px;
+	padding: 0px;
+	border-top: 5px dotted black;
+	border-bottom: 5px dotted black;
+}
+.pl_videoId{
+	display: none;
 }
 
 /*** footer ***/
