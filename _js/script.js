@@ -84,11 +84,13 @@ function getPLItems(id){
 /** Ajax callbacks **/
 // this will show users that are found from the request form 
 function showUsers(data) {
-  //console.log(data);	
   var items=data.items;
 
   $('#foundUsers').empty(); //clearing the ul so that we can add a new set, after a search
   $('#username').val("");  //cleaning the input filed after the search
+  if(data.items.length == 0){  //show error if user matched searchstring
+	$("#foundUsers").append('<div class="error">No users found with that name, please try another search.</div>');
+  }
 
   for (var key in items){ //for each user in our list
     //getting relevant information
@@ -109,7 +111,10 @@ function getPlaylist(data){
 
   var items=data.items;
   $('#foundPlaylist').empty(); //clearing the ul so that we can add a new set, after a search
-
+  if(data.items.length == 0){  //show error if no playlists were found
+	$("#foundPlaylist").append('<div class="error">No playlists found for this user.</div>');
+  }
+  
   //Iterate through each playlist item in the list
   for (var key in items){
     var playlist = items[key];
@@ -121,14 +126,8 @@ function getPlaylist(data){
 	var el = '<li class="playlistItem"><img src="'+ pImageURL +'" width="100" height="50" /><div class="playlistId">'+ pID +'</div><div class="playlistTitle">'+ pTitle +'</div></li>';
     $("#foundPlaylist").append(el);
   } 
-
-  /*Performing youtube-playlist search*/
-  var method = "playlistItems"; //We will want to search in a specific playlist
-  var part = "snippet" //include more information e.g. preview pictures
-  var maxResults = 7; //Max. results to fetch [1-50]
-  var fullUrl = BASE + "/" + method + "?playlistId=" + pID + "&part=" + part + "&key=" + KEY + "&maxResults=" + maxResults;
-	
-  $('#foundPlaylists').append("<img src='" + pImageURL + "'>"); // getting the playlist preview; change the div to the appropriate one to style
+  $('#foundPlaylist').perfectScrollbar('destroy');
+  $('#foundPlaylist').perfectScrollbar();  //update the scrollbars
 }
 
 //Youtube-playlist-search callback
